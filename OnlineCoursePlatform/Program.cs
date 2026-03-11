@@ -15,17 +15,22 @@ public class Program
 
 Выберите действие (введите число и нажмите Enter):
 
-1. Зарегистрироваться
-2. Закрыть приложение
+1. Войти
+2. Зарегистрироваться
+3. Закрыть приложение
 
 ************************************************
 ");
             menuValue = Console.ReadLine();
             if (menuValue == "1")
             {
-                RegisterUser();
+                LoginUser();
             }
             else if (menuValue == "2")
+            {
+                RegisterUser();
+            }
+            else if (menuValue == "3")
             {
                 Console.WriteLine("До свидания!");
                 Environment.Exit(0);
