@@ -56,4 +56,19 @@ public class Program
             Console.WriteLine("Произошла ошибка, произведен выход на главную страницу\n");
         }
     }
+
+    public static void LoginUser()
+    {
+        Console.WriteLine("Введите имя и фамилию через пробел и нажмите Enter:");
+        string fullName = Console.ReadLine();
+
+        if (UsersService.Get(fullName) != null)
+        {
+            Console.WriteLine($"Пользователь '{fullName}' успешно вошел\n");
+        }
+        else
+        {
+            Console.WriteLine("Пользователь не найден, произведен выход на главную страницу\n");
+        }
+    }
 }
