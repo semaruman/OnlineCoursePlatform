@@ -41,5 +41,45 @@ ORDER BY c.time DESC;";
 
             return resList;
         }
+
+        /// <summary>
+        /// Удаление комментария пользователя
+        /// </summary>
+        /// <param name="id">id комментария</param>
+        /// <returns>Удалось ли удалить комментарий</returns>
+        public static bool Delete(int id)
+        {
+            using var connection = new MySqlConnection(Constant.ConnectionString);
+            connection.Open();
+            MySqlTransaction transaction = connection.BeginTransaction();
+
+            try
+            {
+                string sqlQuery = @"DELETE FROM course_reviews
+                                WHERE comment_id = @id;";
+
+                using MySqlCommand command = new MySqlCommand(sqlQuery, connection, transaction);
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+
+                command.CommandText = $@"DELETE FROM comments
+                                     WHERE reply_comment_id = @id;";
+
+                command.ExecuteNonQuery();
+
+                command.CommandText = $@"DELETE FROM comments
+                                     WHERE id = @id;";
+
+                command.ExecuteNonQuery();
+
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return false;
+            }
+        }
     }
 }
