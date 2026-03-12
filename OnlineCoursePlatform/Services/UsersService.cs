@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 using OnlineCoursePlatform.Models;
 
 namespace OnlineCoursePlatform.Services
@@ -55,24 +56,24 @@ FROM users
 WHERE full_name = @fullName AND is_active";
 
             using var command = new MySqlCommand(sqlQuery, connection);
-            
+
             command.Parameters.AddWithValue("@fullName", fullName);
 
             using var reader = command.ExecuteReader();
 
-            if (reader.Read())
-            {
-                User user = new User();
-                user.FullName = reader.IsDBNull(0)? null : reader.GetString(0);
-                user.Details = reader.IsDBNull(1) ? null : reader.GetString(1);
-                user.JoinDate = reader.GetDateTime(2);
-                user.Avatar = reader.IsDBNull(3) ? null : reader.GetString(3);
-                user.IsActive = reader.GetBoolean(4);
-
-                return user;
-            }
-
-            return null;
+            return reader.Read()
+         ? new User
+         {
+             FullName = reader.GetString("full_name"),
+             Details = reader.IsDBNull("details") ? null : reader.GetString("details"),
+             JoinDate = reader.GetDateTime("join_date"),
+             Avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
+             IsActive = reader.GetBoolean("is_active"),
+             Knowledge = reader.GetInt32("knowledge"),
+             Reputation = reader.GetInt32("reputation"),
+             FollowersCount = reader.GetInt32("followers_count")
+         }
+         : null;
         }
 
         /// <summary>
