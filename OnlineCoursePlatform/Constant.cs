@@ -8,6 +8,6 @@ namespace OnlineCoursePlatform
 {
     public class Constant
     {
-        public const string ConnectionString = "Server=localhost:3306;Database=test;Uid=root;Pwd=sEmA303033;";
+        public const string ConnectionString = "Server=localhost:3306;Database=stepik;Uid=root;Pwd=sEmA303033;";
     }
 }
