@@ -92,5 +92,39 @@ WHERE full_name = @fullName AND is_active";
 
             return Convert.ToInt32(res);
         }
+
+        /// <summary>
+        /// Форматирование показателей пользователя
+        /// </summary>
+        /// <param name="number">Число для форматирования</param>
+        /// <returns>Отформатированное число</returns>
+        public static string FormatUserMetrics(int number)
+        {
+            using var connection = new MySqlConnection(Constant.ConnectionString);
+
+            connection.Open();
+
+            string sqlFunctionName = "format_number";
+
+            using var command = new MySqlCommand(sqlFunctionName, connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            var numberParameter = new MySqlParameter("number", number)
+            {
+                Direction = ParameterDirection.Input
+            };
+
+            var returnValueParameter = new MySqlParameter()
+            {
+                Direction = ParameterDirection.ReturnValue
+            };
+
+            command.Parameters.Add(numberParameter);
+            command.Parameters.Add(returnValueParameter);
+
+            command.ExecuteNonQuery();
+
+            return returnValueParameter.Value.ToString();
+        }
     }
 }
