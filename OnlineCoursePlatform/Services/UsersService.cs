@@ -74,5 +74,22 @@ WHERE full_name = @fullName AND is_active";
 
             return null;
         }
+
+        /// <summary>
+        /// Получение общего количества пользователей
+        /// </summary>
+        public static int GetTotalCount()
+        {
+            using var connection = new MySqlConnection(Constant.ConnectionString);
+            connection.Open();
+
+            string sqlQuery = @"SELECT COUNT(id) FROM users";
+
+            using var command = new MySqlCommand(sqlQuery, connection);
+
+            object res = command.ExecuteScalar();
+
+            return Convert.ToInt32(res);
+        }
     }
 }
