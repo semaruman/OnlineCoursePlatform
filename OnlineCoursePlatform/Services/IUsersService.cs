@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineCoursePlatform.Services.EF
+namespace OnlineCoursePlatform.Services
 {
-    public class UsersService : IUsersService
+    public interface IUsersService
     {
     }
 }

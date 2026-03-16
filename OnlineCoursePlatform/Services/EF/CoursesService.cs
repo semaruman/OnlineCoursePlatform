@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCoursePlatform.Services.EF
 {
-    internal class CoursesService
+    public class CoursesService : ICoursesService
     {
     }
 }

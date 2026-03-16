@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCoursePlatform.Services.EF
 {
-    internal class CommentsService
+    public class CommentsService : ICommentsService
     {
     }
 }
