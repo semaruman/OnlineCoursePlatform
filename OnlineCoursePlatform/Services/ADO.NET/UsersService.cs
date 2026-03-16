@@ -2,7 +2,7 @@
 using MySql.Data.MySqlClient;
 using OnlineCoursePlatform.Models;
 
-namespace OnlineCoursePlatform.Services
+namespace OnlineCoursePlatform.Services.ADO.NET
 {
     public class UsersService
     {
@@ -24,11 +24,11 @@ namespace OnlineCoursePlatform.Services
                         command.CommandText = @"INSERT INTO users (full_name, details, join_date, avatar, is_active) VALUES " +
                             "(@FullName, @Details, @JoinDate, @Avatar, @IsActive)";
 
-                        command.Parameters.AddWithValue("@FullName", user.FullName);
-                        command.Parameters.AddWithValue("@Details", user.Details);
-                        command.Parameters.AddWithValue("@JoinDate", user.JoinDate);
-                        command.Parameters.AddWithValue("@Avatar", user.Avatar);
-                        command.Parameters.AddWithValue("@IsActive", user.IsActive);
+                        command.Parameters.AddWithValue("@FullName", user.full_name);
+                        command.Parameters.AddWithValue("@Details", user.details);
+                        command.Parameters.AddWithValue("@JoinDate", user.join_date);
+                        command.Parameters.AddWithValue("@Avatar", user.avatar);
+                        command.Parameters.AddWithValue("@IsActive", user.is_active);
 
                         command.ExecuteNonQuery();
                     }
@@ -64,14 +64,14 @@ WHERE full_name = @fullName AND is_active";
             return reader.Read()
          ? new User
          {
-             FullName = reader.GetString("full_name"),
-             Details = reader.IsDBNull("details") ? null : reader.GetString("details"),
-             JoinDate = reader.GetDateTime("join_date"),
-             Avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
-             IsActive = reader.GetBoolean("is_active"),
-             Knowledge = reader.GetInt32("knowledge"),
-             Reputation = reader.GetInt32("reputation"),
-             FollowersCount = reader.GetInt32("followers_count")
+             full_name = reader.GetString("full_name"),
+             details = reader.IsDBNull("details") ? null : reader.GetString("details"),
+             join_date = reader.GetDateTime("join_date"),
+             avatar = reader.IsDBNull("avatar") ? null : reader.GetString("avatar"),
+             is_active = reader.GetBoolean("is_active"),
+             knowledge = reader.GetInt32("knowledge"),
+             reputation = reader.GetInt32("reputation"),
+             followers_count = reader.GetInt32("followers_count")
          }
          : null;
         }

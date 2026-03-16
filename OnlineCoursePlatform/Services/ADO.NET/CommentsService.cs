@@ -1,7 +1,7 @@
 using MySql.Data.MySqlClient;
 using OnlineCoursePlatform.Models;
 
-namespace OnlineCoursePlatform.Services
+namespace OnlineCoursePlatform.Services.ADO.NET
 {
     public class CommentsService
     {

@@ -1,5 +1,5 @@
 ﻿using OnlineCoursePlatform.Models;
-using OnlineCoursePlatform.Services;
+using OnlineCoursePlatform.Services.ADO.NET;
 
 public class Program
 {
@@ -18,14 +18,14 @@ public class Program
             {
                 case "1":
                     User user = PerformLogin();
-                    if (!string.IsNullOrEmpty(user?.FullName))
+                    if (!string.IsNullOrEmpty(user?.full_name))
                     {
                         HandleUserMenu(user);
                     }
                     break;
                 case "2":
                     User newUser = PerformRegistration();
-                    if (!string.IsNullOrEmpty(newUser?.FullName))
+                    if (!string.IsNullOrEmpty(newUser?.full_name))
                     {
                         HandleUserMenu(newUser);
                     }
@@ -94,7 +94,7 @@ public class Program
 
         var newUser = new User
         {
-            FullName = userName
+            full_name = userName
         };
 
         bool isAdditionSuccessful = UsersService.Add(newUser);
@@ -102,7 +102,7 @@ public class Program
         if (isAdditionSuccessful)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Пользователь '{newUser.FullName}' успешно добавлен.\n");
+            Console.WriteLine($"Пользователь '{newUser.full_name}' успешно добавлен.\n");
             Console.ResetColor();
             return newUser;
         }
@@ -131,10 +131,10 @@ public class Program
 
         User user = UsersService.Get(userName);
 
-        if (!string.IsNullOrEmpty(user?.FullName))
+        if (!string.IsNullOrEmpty(user?.full_name))
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Пользователь '{user.FullName}' успешно вошел.\n");
+            Console.WriteLine($"Пользователь '{user.full_name}' успешно вошел.\n");
             Console.ResetColor();
             return user;
         }
@@ -183,7 +183,7 @@ public class Program
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine(@$"
-* {user.FullName} *
+* {user.full_name} *
 
 Выберите действие (введите число и нажмите Enter):
 
@@ -222,19 +222,19 @@ public class Program
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(@$"
-* {user.FullName} *
+* {user.full_name} *
 
 Выберите действие (введите число и нажмите Enter):
 
 1. Назад
 
-Профиль пользователя: {user.FullName}
-Дата регистрации: {user.JoinDate}
-Описание профиля: {user.Details ?? "Не заполнено"}
-Фото профиля: {user.Avatar ?? "Не заполнено"}
-{UsersService.FormatUserMetrics(user.FollowersCount)} подписчиков
-{UsersService.FormatUserMetrics(user.Reputation)} репутация
-{UsersService.FormatUserMetrics(user.Knowledge)} знания
+Профиль пользователя: {user.full_name}
+Дата регистрации: {user.join_date}
+Описание профиля: {user.details ?? "Не заполнено"}
+Фото профиля: {user.avatar ?? "Не заполнено"}
+{UsersService.FormatUserMetrics(user.followers_count)} подписчиков
+{UsersService.FormatUserMetrics(user.reputation)} репутация
+{UsersService.FormatUserMetrics(user.knowledge)} знания
 ");
         Console.ResetColor();
     }
@@ -246,7 +246,7 @@ public class Program
     {
         while (true)
         {
-            DisplayUserCourses(user.FullName);
+            DisplayUserCourses(user.full_name);
             string choice = Console.ReadLine();
 
             switch (choice)
