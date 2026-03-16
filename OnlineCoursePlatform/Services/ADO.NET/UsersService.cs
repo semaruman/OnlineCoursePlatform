@@ -109,7 +109,7 @@ WHERE full_name = @fullName AND is_active";
             using var command = new MySqlCommand(sqlFunctionName, connection);
             command.CommandType = CommandType.StoredProcedure;
 
-            var numberParameter = new MySqlParameter("number", number)
+            var numberParameter = new MySqlParameter("num", number)
             {
                 Direction = ParameterDirection.Input
             };
