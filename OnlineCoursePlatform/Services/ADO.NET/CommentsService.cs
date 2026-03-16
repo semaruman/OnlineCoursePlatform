@@ -3,7 +3,7 @@ using OnlineCoursePlatform.Models;
 
 namespace OnlineCoursePlatform.Services.ADO.NET
 {
-    public class CommentsService
+    public class CommentsService : ICommentsService
     {
         public static List<Comment> Get(int course_idP)
         {
