@@ -34,5 +34,24 @@ namespace OnlineCoursePlatform.Services.EF
                 return dbContext.Users.Count();
             }        
         }
+
+        /// <summary>
+        /// Добавление нового пользователя в таблицу users
+        /// </summary>
+        /// <param name="user">Новый пользователь</param>
+        /// <returns>Удалось ли добавить пользователя</returns>
+        public bool Add(User user)
+        {
+            try
+            {
+                using var dbContext = new ApplicationDbContext();
+                dbContext.Users.Add(user);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
