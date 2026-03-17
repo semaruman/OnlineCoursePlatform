@@ -17,5 +17,22 @@ namespace OnlineCoursePlatform.Services.EF
 
             return user;
         }
+
+        /// <summary>
+        /// Получение общего количества пользователей
+        /// </summary>
+        public int GetTotalCount()
+        {
+            using var dbContext = new ApplicationDbContext();
+
+            if (dbContext.Users == null || dbContext.Users.Count() == 0 )
+            {
+                return 0;
+            }
+            else
+            {
+                return dbContext.Users.Count();
+            }        
+        }
     }
 }
