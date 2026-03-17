@@ -1,4 +1,5 @@
-﻿using OnlineCoursePlatform.Data;
+﻿using System.Globalization;
+using OnlineCoursePlatform.Data;
 using OnlineCoursePlatform.Models;
 
 namespace OnlineCoursePlatform.Services.EF
@@ -51,6 +52,30 @@ namespace OnlineCoursePlatform.Services.EF
             catch
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Форматирование показателей пользователя
+        /// </summary>
+        /// <param name="number">Число для форматирования</param>
+        /// <returns>Отформатированное число</returns>
+        public string? FormatUserMetrics(int number)
+        {
+            if (number < 1000)
+            {
+                return number.ToString();
+            }
+            else if (number % 1000 == 0)
+            {
+                return (number/1000).ToString() + "K";
+            }
+            else
+            {
+                double resNumber = number / 1000.0;
+                string res = resNumber.ToString("0.0") + "K";
+                res = res.Replace(".0K", "K");
+                return res;
             }
         }
     }
