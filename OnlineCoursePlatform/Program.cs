@@ -8,10 +8,12 @@ public class Program
     /// </summary>
     public static void Main()
     {
-        DisplayMainMenu();
+        
 
         while (true)
         {
+            Console.Clear();
+            DisplayMainMenu();
             string choice = Console.ReadLine();
 
             switch (choice)

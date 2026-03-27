@@ -4,7 +4,7 @@ using OnlineCoursePlatform.Models;
 
 namespace OnlineCoursePlatform.Services.ADO.NET
 {
-    public class UsersService : IUsersService
+    public class UsersService 
     {
         /// <summary>
         /// Добавление нового пользователя в таблицу users

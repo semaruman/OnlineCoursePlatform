@@ -3,7 +3,7 @@ using OnlineCoursePlatform.Models;
 
 namespace OnlineCoursePlatform.Services.ADO.NET
 {
-    public class CoursesService : ICoursesService
+    public class CoursesService 
     {
         /// <summary>
         /// Получение общего количества курсов
